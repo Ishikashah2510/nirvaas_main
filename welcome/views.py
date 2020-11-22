@@ -51,6 +51,7 @@ def register(request):
     else:
         return render(request, 'welcome/registration.html')
 
+
 def user_login(request):
     if request.method == 'POST':
         email = request.POST.get('email')

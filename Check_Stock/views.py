@@ -1,8 +1,9 @@
 from django.shortcuts import render
 from sell_staff.models import Items
 
+
 def check_stock(request):
-    if(request.method=="POST"):
+    if request.method == "POST":
         item_type = request.POST.get("item_type")
         val = request.POST.get("val_1")
         q = Items.objects.none()
