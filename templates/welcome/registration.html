@@ -1,21 +1,43 @@
-{% extends "welcome/index.html" %}
-{% load static %}
-{% block body_block %}
-  <div class="container">
-    <div class="jumbotron">
-      {% if registered %}
-        <h1>Thank you for registering!</h1>
-      {% else %}
-        <h1>Register Here</h1>
-        <h3>Just fill out the form.</h3>
-<form enctype="multipart/form-data" method="POST">
-          {% csrf_token %}
-          {{ user_form.as_p }}
-          {{ profile_form.as_p }}
-          <input type="submit" name="" value="Register">
-        </form>
-        
-      {% endif %}
-    </div>
-  </div>
-{% endblock %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Registration</title>
+  <link rel="stylesheet" type="text/css" href="button_main.css">
+</head>
+<body background="background.jpg" style="background-size: cover; background-color: #cccccc">
+  <center>
+<h1 style="background-color: white; width: 400px;">NIRVAAS</h1>
+  </center>
+
+
+<center>
+    <br><br>
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+<form method="post" action="{% url 'welcome:register' %}">
+    {% csrf_token %}
+<div class="b"> <br><br>
+  <h2 style="background-color: #F4ECBE; width: 300px; height: 30px;">Registration</h2><br><br>
+    Name <br>&nbsp<input type="text" name="name" required>
+    <br><br>
+    Mobile no.<br>&nbsp<input type="tel" name="mno" required>
+    <br><br>
+  Email <br>&nbsp<input type="email" name="email" required>
+  <br><br>
+  Password <br>&nbsp<input type="password" name="password" minlength="8" required>
+    <br><br>
+    Re-type Password <br>&nbsp<input type="password" name="password1" minlength="8" required>
+  <br><br><br>
+  User Type<br>
+  &nbsp<input type="radio" name="choice_field" value="Student" checked>&nbspStudent<br>
+  &nbsp<input type="radio" name="choice_field" value="Stationery_staff" checked>&nbspStationery Staff<br>
+    &nbsp<input type="radio" name="choice_field" value="Admin" checked>&nbspSystem Admin<br>
+  <br><br>
+    <div align="center"><a class="example_d" style="text-decoration: none;"><input type="reset" name="reset" value="Reset" style="text-decoration-style: none; border: none; background-color: #20bf6b; padding: 0; border: 4px solid #20bf6b;border-radius: 6px; height: 40px; width: 90px;"></a>
+        &nbsp&nbsp&nbsp
+    <a class="example_d" style="text-decoration: none;"><input type="submit" name="Login" value="Register" style="text-decoration-style: none; border: none; background-color: #20bf6b; padding: 0; border: 4px solid #20bf6b;border-radius: 6px; height: 40px; width: 90px;"></a></div>
+</center>
+
+</div>
+</form>
+</body>
+</html>

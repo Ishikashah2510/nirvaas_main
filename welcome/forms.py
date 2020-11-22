@@ -6,7 +6,9 @@ from django.contrib.auth.models import User
 class Login(forms.Form):
     email = forms.EmailField(label='Email ID')
     password = forms.CharField(min_length=8, widget=forms.PasswordInput,label='Password')
-    CHOICES = [('1', 'Student'), ('2', 'Stationery Staff'),('3','Administrator')]
+    CHOICES = [('1', 'Student'),
+               ('2', 'Stationery Staff'),
+               ('3', 'Administrator')]
     choice_field = forms.ChoiceField(widget=forms.RadioSelect, choices=CHOICES)
 
 
