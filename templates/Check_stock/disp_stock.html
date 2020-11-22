@@ -35,15 +35,17 @@
   <a href='{% url "welcome:sell" %}' class="w3-bar-item w3-button w3-hover-indigo" style="width: 30%">Logout</a>
 </div>
 <br><br>
-<ul>
-{% if items|length > 1 %}
-{% for item in items %}
-
-    <li>{{ item.Item_id }}<pre>               </pre>{{ item.Item_title }}<pre>               </pre>{{ item.Item_quantity }}</li>
-{% endfor %}
-{% endif %}
+<ul style="list-style-type:square;">
+<li>Item ID&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspTitle&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspQuantity</li>
     </ul>
+<ul>
+    {% if items|length > 1 %}
+{% for item in items %}<li>{{item.Item_id}}&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{item.Item_title}}&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{item.Item_quantity}}</li>{% endfor %}
 
+    {% else %}
+    <li>{{items.Item_id}}&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{items.Item_title}}&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{items.Item_quantity}}</li>
+    {% endif %}
+</ul>
 <br>
 
 
