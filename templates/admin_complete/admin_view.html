@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Admin View</title>
+	<style type="text/css">
+		a{
+			font-size: 20px;
+			background-color: lemonchiffon;
+		}
+		body {
+ background-color: #cccccc;
+ background-size: cover;
+}
+		th, td{
+			padding: 100px;
+			text-align: center;
+		}
+		form{
+			text-align: center;
+		}
+		label{
+			font-size: 22px;
+			text-align: center;
+			padding-right: 100px;
+		}
+		input[type=submit] {
+    width: 9em;
+    height: 3em;
+    font-size: 22px;
+}
+
+	</style>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+<br>
+<div class="w3-bar w3-border w3-light-grey">
+  <a href="{% url 'welcome:view_admin' %}" class="w3-bar-item w3-button w3-hover-pale-blue" style="width: 35%">View details of an account</a>
+  <a href="{% url 'welcome:delete_account' %}" class="w3-bar-item w3-button w3-hover-light-blue" style="width: 35%">Delete an account</a>
+  <a href="{% url 'index' %}" class="w3-bar-item w3-button w3-hover-indigo" style="width: 30%">Logout</a>
+</div>
+<h1 style="color: #FB7A53; text-align: center;">View Details of an Account</h1>
+<br>
+<center>
+{% if message %} <p> <strong> {{ message }}</strong></p> {% endif %}
+</center>
+<center>
+<form action="{% url 'welcome:view_admin' %}" method="post">
+    {% csrf_token %}
+<label>
+	&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+	Please enter details : <input type="text" name="det_view" required>
+</label>
+<br><br>
+<label>Enter which detail to view :
+	<br>
+<input type="radio" name="det_type" value="emailid" checked>Email Id
+<br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+<input type="radio" name="det_type" value="name">Name
+</label>
+<br><br><br>
+<input type="submit" name="submit" value="View">
+</form>
+</center>
+<form action="{%  url 'welcome:view_admin_all' %}" method="POST">
+    {% csrf_token %}
+    <input type="submit" value="View all accounts">
+</form>
+</html>

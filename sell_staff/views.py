@@ -3,9 +3,11 @@ import random
 from sell_staff.models import Items
 
 # Create your views here.
+
+
 def sell(request):
-    if(request.method=="POST"):
-        item_name=request.POST.get("item_name")
+    if request.method == "POST":
+        item_name = request.POST.get("item_name")
         item_ab = request.POST.get("item_ab")
         item_price = request.POST.get("item_price")
         quantity = request.POST.get("qty")
@@ -13,8 +15,8 @@ def sell(request):
         item_image = request.POST.get("item_pic")
         item_type = request.POST.get("item_type")
         item_id = 100000
-        while(True):
-            item_id = random.randint(100000,999999)
+        while True:
+            item_id = random.randint(100000, 999999)
             try:
                 i = Items.objects.get(Item_id=item_id)
             except Items.DoesNotExist:
@@ -25,5 +27,4 @@ def sell(request):
         i.save()
         return render(request, 'welcome/homepage_staff.html', {'message': 'The item has been successfully uploaded!'})
     else:
-        return render(request,'sell_staff/sell_form.html')
-
+        return render(request, 'sell_staff/sell_form.html')

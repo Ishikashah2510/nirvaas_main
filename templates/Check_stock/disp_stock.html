@@ -12,7 +12,8 @@
  background-size: cover;
 }
 		th, td{
-			padding: 100px;
+			padding-right: 70px;
+            padding-bottom: 20px;
 			text-align: center;
 		}
 		form{
@@ -31,24 +32,27 @@
 <br>
 <div class="w3-bar w3-border w3-light-grey">
   <a href='{% url "welcome:sell" %}' class="w3-bar-item w3-button w3-hover-pale-blue" style="width: 35%">Sell an item</a>
-  <a href='{% url "welcome:sell" %}' class="w3-bar-item w3-button w3-hover-light-blue" style="width: 35%">Check Stock</a>
-  <a href='{% url "welcome:sell" %}' class="w3-bar-item w3-button w3-hover-indigo" style="width: 30%">Logout</a>
+  <a href='{% url "welcome:check_stock" %}' class="w3-bar-item w3-button w3-hover-light-blue" style="width: 35%">Check Stock</a>
+  <a href='{% url "index" %}' class="w3-bar-item w3-button w3-hover-indigo" style="width: 30%">Logout</a>
 </div>
 <br><br>
-<ul style="list-style-type:square;">
-<li>Item ID&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspTitle&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspQuantity</li>
-    </ul>
-<ul>
+<center>
+<table>
+    <tr>
+    <td>Photo</td><td>Item ID</td><td>Item name</td><td>Quantity</td>
+    </tr>
     {% if items|length > 1 %}
-{% for item in items %}<li>{{item.Item_id}}&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{item.Item_title}}&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{item.Item_quantity}}</li>{% endfor %}
-
+    {% for item in items %}
+        <tr>
+        <td><img src="{{ item.Item_photo.url }}" alt="{{ item.Item_title }}"></td><td>{{ item.Item_id }}</td><td>{{ item.Item_title }}</td><td>{{ item.Item_quantity }}</td>
+        </tr>
+    {% endfor %}
     {% else %}
-    <li>{{items.Item_id}}&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{items.Item_title}}&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{items.Item_quantity}}</li>
+        <tr>
+        <td><img src="{{ items.Item_photo.url }}" alt="{{ item.Item_title }}"></td><td>{{ items.Item_id }}</td><td>{{ items.Item_title }}</td><td>{{ items.Item_quantity }}</td>
+        </tr>
     {% endif %}
-</ul>
-<br>
-
-
-
+</table>
+</center>
 </body>
 </html>

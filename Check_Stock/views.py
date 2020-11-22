@@ -8,17 +8,26 @@ def check_stock(request):
         val = request.POST.get("val_1")
         q = Items.objects.none()
         if item_type == 'Item_name':
-            try:
-                q = Items.objects.filter(Item_title=val)
-            except Items.DoesNotExist:
+            q = Items.objects.filter(Item_title__contains=val)
+            if not q:
                 return render(request, 'Check_stock/check_html.html', {'message': 'The item does not exist!'})
         else:
-            try:
-                q = Items.objects.filter(Item_ab=val)
-            except Items.DoesNotExist:
+            q = Items.objects.filter(Item_ab__contains=val)
+            if not q:
                 return render(request, 'Check_stock/check_html.html', {'message': 'The item does not exist!'})
 
-        return render(request,'Check_stock/disp_stock.html',{'items': q})
+        return render(request,'Check_stock/disp_stock.html', {'items': q})
 
     else:
         return render(request,'Check_stock/check_html.html')
+
+
+def view_all_items(request):
+    if request.method == 'POST':
+        try:
+            q = Items.objects.all()
+            return render(request, 'Check_stock/disp_stock.html', {'items': q})
+        except Items.DoesNotExist:
+            return render(request, 'Check_stock/check_html.html', {'message': 'The item does not exist!'})
+    else:
+        return render(request, 'Check_stock/check_html.html')
