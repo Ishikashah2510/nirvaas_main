@@ -38,7 +38,7 @@
 {% if message %} <p> <strong> {{ message }}</strong></p> {% endif %}
 
 <br>
-<form action="{% url 'welcome:sell' %}" method="post">
+<form action="{% url 'welcome:check_stock' %}" method="post">
     {% csrf_token %}
 
 

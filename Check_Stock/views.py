@@ -6,17 +6,14 @@ def check_stock(request):
         item_type = request.POST.get("item_type")
         val = request.POST.get("val_1")
         q = Items.objects.none()
-        print(val)
         if item_type == 'Item_name':
             try:
-                q = Items.objects.get(Item_title=val)
-                print(q.Item_ab)
+                q = Items.objects.filter(Item_title=val)
             except Items.DoesNotExist:
                 return render(request, 'Check_stock/check_html.html', {'message': 'The item does not exist!'})
         else:
             try:
-                q = Items.objects.get(Item_ab=val)
-                print(q.Item_ab)
+                q = Items.objects.filter(Item_ab=val)
             except Items.DoesNotExist:
                 return render(request, 'Check_stock/check_html.html', {'message': 'The item does not exist!'})
 
