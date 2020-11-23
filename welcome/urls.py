@@ -15,5 +15,7 @@ urlpatterns = [
     url(r'^view_admin_all/$', avs.view_all, name='view_admin_all'),
     url(r'^view_items_all/$', cvws.view_all_items, name='view_items_all'),
     url(r'^delete_account/$', avs.delete_info, name='delete_account'),
+    url(r'^delete_item/$', cvws.delete_item, name='delete_item'),
     url(r'^delete_account_confirm/$', avs.delete_confirm, name='delete_account_confirm'),
+    url(r'^delete_item_confirm/$', cvws.delete_confirm, name='delete_item_confirm'),
 ]

@@ -30,9 +30,10 @@
 </head>
 <br>
 <div class="w3-bar w3-border w3-light-grey">
-  <a href='{% url "welcome:sell" %}' class="w3-bar-item w3-button w3-hover-pale-blue" style="width: 35%">Sell an item</a>
-  <a href='{% url "welcome:check_stock" %}' class="w3-bar-item w3-button w3-hover-light-blue" style="width: 35%">Check Stock</a>
-  <a href='{% url "index" %}' class="w3-bar-item w3-button w3-hover-indigo" style="width: 30%">Logout</a>
+  <a href='{% url "welcome:sell" %}' class="w3-bar-item w3-button w3-hover-pale-blue" style="width: 25%">Sell an item</a>
+    <a href='{% url "welcome:delete_item" %}' class="w3-bar-item w3-button w3-hover-light-blue" style="width: 25%">Delete an item</a>
+  <a href='{% url "welcome:check_stock" %}' class="w3-bar-item w3-button w3-hover-light-blue" style="width: 25%">Check Stock</a>
+  <a href='{% url "index" %}' class="w3-bar-item w3-button w3-hover-indigo" style="width: 25%">Logout</a>
 </div>
 {% if message %} <p> <center><strong> {{ message }}</strong></center></p> {% endif %}
 
