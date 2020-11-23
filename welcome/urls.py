@@ -1,4 +1,6 @@
 from django.conf.urls import url
+from django.conf.urls.static import static
+from nirvaas_main import settings
 from welcome import views
 import sell_staff.views as vws
 import Check_Stock.views as cvws
@@ -18,4 +20,4 @@ urlpatterns = [
     url(r'^delete_item/$', cvws.delete_item, name='delete_item'),
     url(r'^delete_account_confirm/$', avs.delete_confirm, name='delete_account_confirm'),
     url(r'^delete_item_confirm/$', cvws.delete_confirm, name='delete_item_confirm'),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
