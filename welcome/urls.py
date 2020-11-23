@@ -5,6 +5,7 @@ from welcome import views
 import sell_staff.views as vws
 import Check_Stock.views as cvws
 import admin_complete.views as avs
+import buy_student.views as bsv
 # SET THE NAMESPACE!
 app_name = 'welcome'
 # Be careful setting the name to just /login use userlogin instead!
@@ -20,4 +21,7 @@ urlpatterns = [
     url(r'^delete_item/$', cvws.delete_item, name='delete_item'),
     url(r'^delete_account_confirm/$', avs.delete_confirm, name='delete_account_confirm'),
     url(r'^delete_item_confirm/$', cvws.delete_confirm, name='delete_item_confirm'),
+    url(r'^display_details/$', bsv.display_details, name='display_details'),
+    url(r'^add_to_cart/$', bsv.add_to_cart, name='add_to_cart'),
+    url(r'^display_all_item/$', bsv.display_all_details, name='display_all_item'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

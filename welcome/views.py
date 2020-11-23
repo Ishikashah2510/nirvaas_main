@@ -8,7 +8,7 @@ import re
 from welcome.models import Users
 from django.db.models import Q
 
-
+email = " "
 def index(request):
     return render(request, 'welcome/index.html')
 

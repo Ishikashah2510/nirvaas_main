@@ -11,3 +11,4 @@ class Cart(models.Model):
     Item_price = models.ForeignKey(smd.Items, on_delete=models.CASCADE, related_name='Cart_price')
     Item_quantity = models.IntegerField(default=0)
     buyer_email = models.ForeignKey(wmd.Users, on_delete=models.CASCADE)
+    Order_id = models.IntegerField(primary_key=True, default=111)

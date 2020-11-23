@@ -27,5 +27,23 @@
   <a href="customer_detail.php" class="w3-bar-item w3-button w3-hover-cyan" style="width: 25%">View cart</a>
   <a href="{% url 'index' %}" class="w3-bar-item w3-button w3-hover-indigo" style="width: 25%">Logout</a>
 </div>
-<h1 style="color: #FB7A53; text-align: center;">Kindly Make your choice from above</h1>
+{% if item %}
+<center>
+    <table>
+        <tr>
+            <td>
+                <img src='{{ item.Item_photo  }}'>
+            </td>
+            <td>
+                {{ item.Item_title }} <br> <br> {{ item.Item_ab }} <br> <br>{{ item.Item_description }} <br> <br> {{ item.Item_type }} <br> <br> {{ item.Item_price }}
+            </td>
+        </tr>
+    </table>
+    <form action="{% url "welcome:add_to_cart" %}" method="post">
+        {% csrf_token %}
+        <input type="number" name="id" value="{{ item.Item_id }}" hidden>
+        <input type="submit" name="submit" value="Add to Cart">
+    </form>
+</center>
+{% endif %}
 </html>
