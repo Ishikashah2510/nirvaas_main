@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Admin View</title>
+	<style type="text/css">
+		a{
+			font-size: 20px;
+			background-color: lemonchiffon;
+		}
+		body {
+ background-color: #cccccc;
+ background-size: cover;
+}
+		th, td{
+			text-align: center;
+            padding-right: 70px;
+            padding-bottom: 20px;
+		}
+		form{
+			text-align: center;
+		}
+		label{
+			font-size: 22px;
+			text-align: center;
+			padding-right: 100px;
+		}
+		input[type=submit] {
+    width: 9em;
+    height: 3em;
+    font-size: 22px;
+}
+
+	</style>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+<br>
+<div class="w3-bar w3-border w3-light-grey">
+  <a href="{% url 'welcome:view_admin' %}" class="w3-bar-item w3-button w3-hover-pale-blue" style="width: 35%">View details of an account</a>
+  <a href="{% url 'welcome:delete_account' %}" class="w3-bar-item w3-button w3-hover-light-blue" style="width: 35%">Delete an account</a>
+  <a href="{% url 'index' %}" class="w3-bar-item w3-button w3-hover-indigo" style="width: 30%">Logout</a>
+</div>
+<h1 style="color: #FB7A53; text-align: center;">View Details of an Account</h1>
+<br>
+<center>
+<table>
+    <tr>
+    <td>Name</td><td>Mobile No.</td><td>Email ID</td><td>User Type</td>
+    </tr>
+    {% for user in users %}
+        <tr>
+        <td>{{ user.name }}</td><td>{{ user.mobile_no }}</td><td>{{ user.email_id }}</td><td>{{ user.type_user }}</td>
+        </tr>
+    {% endfor %}
+</table>
+</center>
+</html>

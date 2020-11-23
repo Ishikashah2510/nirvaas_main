@@ -9,7 +9,6 @@ from welcome.models import Users
 from django.db.models import Q
 
 
-
 def index(request):
     return render(request, 'welcome/index.html')
 
@@ -50,6 +49,7 @@ def register(request):
         return render(request, 'welcome/login.html')
     else:
         return render(request, 'welcome/registration.html')
+
 
 def user_login(request):
     if request.method == 'POST':

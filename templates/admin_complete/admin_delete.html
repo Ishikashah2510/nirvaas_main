@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Admin Homepage</title>
+	<title>Delete an account</title>
 	<style type="text/css">
 		a{
 			font-size: 20px;
@@ -40,5 +40,21 @@
   <a href="{% url 'welcome:delete_account'%}" class="w3-bar-item w3-button w3-hover-light-blue" style="width: 35%">Delete an account</a>
   <a href="{% url 'index' %}" class="w3-bar-item w3-button w3-hover-indigo" style="width: 30%">Logout</a>
 </div>
-<h1 style="color: #FB7A53; text-align: center;">Kindly make your choice from above</h1>
+<h1 style="color: #FB7A53; text-align: center;">Delete an Account</h1>
+<br>
+<center>
+{% if message %} <p> <strong> {{ message }}</strong></p> {% endif %}
+</center>
+<center>
+<form action="{% url 'welcome:delete_account' %}" method="post">
+    {% csrf_token %}
+<label>
+	&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+	Please enter email ID of the account you wish to delete: <input type="text" name="det_view" required>
+</label>
+<br><br>
+<input type="submit" name="submit" value="Delete">
+</form>
+</center>
+
 </html>
