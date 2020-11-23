@@ -11,7 +11,8 @@
  background-size: cover;
 }
 		th, td{
-			padding: 100px;
+			padding-right: 70px;
+            padding-bottom: 20px;
 			text-align: center;
 		}
 
@@ -27,5 +28,22 @@
   <a href="{% url "welcome:view_cart" %}" class="w3-bar-item w3-button w3-hover-cyan" style="width: 25%">View cart</a>
   <a href="{% url 'index' %}" class="w3-bar-item w3-button w3-hover-indigo" style="width: 25%">Logout</a>
 </div>
-<h1 style="color: #FB7A53; text-align: center;">Kindly Make your choice from above</h1>
+<center>
+<table>
+    <tr>
+    <td>Item ID</td><td>Item name</td><td>Price</td>
+    </tr>
+    {% if items|length > 1 %}
+    {% for item in items %}
+        <tr>
+        <td>{{ item.Item_id }}</td><td>{{ item.Item_title }}</td><td>{{ item.Item_price }}</td>
+        </tr>
+    {% endfor %}
+    {% else %}
+        <tr>
+        <td><td>{{ items.Item_id }}</td><td>{{ items.Item_title }}</td><td>{{ items.Item_price }}</td>
+        </tr>
+    {% endif %}
+</table>
+</center>
 </html>

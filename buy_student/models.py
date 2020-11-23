@@ -6,9 +6,9 @@ from welcome import models as wmd
 
 
 class Cart(models.Model):
-    Item_id = models.ForeignKey(smd.Items, on_delete=models.CASCADE, related_name='Cart_id')
-    Item_title = models.ForeignKey(smd.Items, on_delete=models.CASCADE, related_name='Cart_title')
-    Item_price = models.ForeignKey(smd.Items, on_delete=models.CASCADE, related_name='Cart_price')
-    Item_quantity = models.IntegerField(default=0)
-    buyer_email = models.ForeignKey(wmd.Users, on_delete=models.CASCADE)
+    Item_id = models.IntegerField(default=0)
+    Item_title = models.CharField(max_length=100)
+    Item_price = models.FloatField()
+    Item_quantity = models.IntegerField(max_length=2, default=1)
+    email_id = models.EmailField(default="")
     Order_id = models.IntegerField(primary_key=True, default=111)

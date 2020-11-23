@@ -8,7 +8,7 @@ import re
 from welcome.models import Users
 from django.db.models import Q
 
-email = " "
+
 def index(request):
     return render(request, 'welcome/index.html')
 
@@ -56,6 +56,9 @@ def user_login(request):
         email = request.POST.get('email')
         password_ = request.POST.get('password')
         choice = request.POST.get('choice_field')
+        f = open('loggedin.txt', 'w')
+        f.write(email)
+        f.close()
         if choice == 'Student':
             try:
                 check_details = Users.objects.get(email_id=str(email), password=str(password_), type_user=str(choice))

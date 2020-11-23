@@ -24,7 +24,7 @@
 <div class="w3-bar w3-border w3-light-grey">
   <a href='{% url "welcome:display_all_item" %}' class="w3-bar-item w3-button w3-hover-pale-blue" style="width: 25%">Buy an item</a>
   <a href="medicine_detail.php" class="w3-bar-item w3-button w3-hover-light-blue" style="width: 25%">Bid</a>
-  <a href="customer_detail.php" class="w3-bar-item w3-button w3-hover-cyan" style="width: 25%">View cart</a>
+  <a href="{% url "welcome:view_cart" %}" class="w3-bar-item w3-button w3-hover-cyan" style="width: 25%">View cart</a>
   <a href="{% url 'index' %}" class="w3-bar-item w3-button w3-hover-indigo" style="width: 25%">Logout</a>
 </div>
 {% if item %}

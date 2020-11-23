@@ -24,4 +24,5 @@ urlpatterns = [
     url(r'^display_details/$', bsv.display_details, name='display_details'),
     url(r'^add_to_cart/$', bsv.add_to_cart, name='add_to_cart'),
     url(r'^display_all_item/$', bsv.display_all_details, name='display_all_item'),
+    url(r'^view_cart/$', bsv.view_cart, name='view_cart'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
