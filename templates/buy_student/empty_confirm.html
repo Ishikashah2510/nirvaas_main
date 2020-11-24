@@ -28,29 +28,16 @@
     <a href="{% url "welcome:goto_display_order" %}" class="w3-bar-item w3-button w3-hover-cyan" style="width: 20%">View Orders</a>
   <a href="{% url 'index' %}" class="w3-bar-item w3-button w3-hover-indigo" style="width: 20%">Logout</a>
 </div>
-
 <center>
-{% if message %} <p><strong>{{ message }}</strong></p>
-{% endif %}
-    <table>
-    {% if items|length > 1 %}
-        <tr>
-    {% for item in items %}
-
-            <td><img src="{{ item.Item_photo }}" alt="{{ item.Item_title }}" width="70px" height="50px"><br> <br> <a href='{% url "welcome:display_details" %}?item_id={{   item.Item_id}}'> {{ item.Item_title }}</a><br> <br>{{ item.Item_price }}</td>
-        {% if forloop.counter|divisibleby:3 %}
-            </tr>
-            <tr>
-        {% endif %}
-    {% endfor %}
-        </tr>
-    {% else %}
-        <tr>
-        <td><img src="{{ items.Item_photo }}" alt="{{ items.Item_title }}" width="70px" height="50px"><br> <br> <a href='{% url "welcome:display_details" %}?item_id={{   items.Item_id}}'> {{ items.Item_title }}</a><br> <br>{{ items.Item_price }}</td>
-        </tr>
-    {% endif %}
-</table>
-</center>
-
-
+    <br><br>
+<form action="{% url 'welcome:empty_cart' %}" method="post">
+    {% csrf_token %}
+    Are you sure you want to empty the cart?<br><br>
+    <input type="submit" value="Confirm">
+</form>
+<form action="{% url "welcome:view_cart" %}?which=1" method="post">
+    {% csrf_token %}
+    <input type="submit" value="Cancel">
+</form>
+    </center>
 </html>
