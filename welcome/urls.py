@@ -6,6 +6,7 @@ import sell_staff.views as vws
 import Check_Stock.views as cvws
 import admin_complete.views as avs
 import buy_student.views as bsv
+import Bidding.views as bvws
 # SET THE NAMESPACE!
 app_name = 'welcome'
 # Be careful setting the name to just /login use userlogin instead!
@@ -31,4 +32,8 @@ urlpatterns = [
     url(r'^goto_checkout/$', bsv.goto_checkout, name='goto_checkout'),
     url(r'^generate_invoice/$', bsv.generate_invoice, name='generate_invoice'),
     url(r'^goto_display_order/$', bsv.goto_display_order, name='goto_display_order'),
+    url(r'^goto_bid_options/$', bvws.goto_bid_options, name='goto_bid_options'),
+    url(r'^place_an_item_on_bid/$', bvws.place_item_on_bid, name='place_an_item_on_bid'),
+    url(r'^view_items_on_bid/$', bvws.view_items_placed_on_bid, name='view_items_on_bid'),
+    url(r'^remove_item_from_bid/$', bvws.remove_item_from_bid, name='remove_item_from_bid'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

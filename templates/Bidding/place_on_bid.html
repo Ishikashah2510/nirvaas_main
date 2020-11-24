@@ -1,6 +1,6 @@
 <html>
 <head>
-	<title>Buy item</title>
+	<title>Place on Bid</title>
 	<style type="text/css">
 		a{
 			font-size: 20px;
@@ -15,7 +15,7 @@
 			text-align: center;
 		}
 
-	</style>
+    </style>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -28,5 +28,28 @@
     <a href="{% url "welcome:goto_display_order" %}" class="w3-bar-item w3-button w3-hover-cyan" style="width: 20%">View Orders</a>
   <a href="{% url 'index' %}" class="w3-bar-item w3-button w3-hover-indigo" style="width: 20%">Logout</a>
 </div>
-<h1 style="color: #FB7A53; text-align: center;">Kindly Make your choice from above</h1>
+<h1 style="color: #FB7A53; text-align: center;">Place an item on bid</h1>
+<center>
+<form action="{% url 'welcome:place_an_item_on_bid' %}" method="post">
+    {% csrf_token %}
+<label>
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspItem Name : <input type="text" name="item_name" id="item_name" required>
+</label>
+<br><br>
+<label>
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspThreshold : <input type="number" name="item_price" id="item_price" required>
+</label>
+<br><br>
+<label>
+Item Description : <input type="text" name="item_desc" id="item_desc" size="20" required>
+</label>
+<br><br>
+<label>
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+Item Photo : <input type="file" name="item_pic" id="item_pic" accept="image/*" required>
+</label>
+<br><br>
+<input type="submit" value="Submit">
+</form>
+    </center>
 </html>

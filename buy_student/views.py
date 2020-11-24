@@ -3,8 +3,8 @@ from sell_staff.models import Items
 from buy_student.models import Cart, Order
 import random
 from datetime import date
-# Create your views here.
 from datetime import datetime
+
 
 def display_details(request):
     item_id = request.GET.get('item_id')

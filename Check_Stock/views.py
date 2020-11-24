@@ -2,11 +2,14 @@ from django.shortcuts import render
 from sell_staff.models import Items
 
 
+q = Items.objects.none()
+
+
 def check_stock(request):
+    global q
     if request.method == "POST":
         item_type = request.POST.get("item_type")
         val = request.POST.get("val_1")
-        q = Items.objects.none()
         if item_type == 'Item_name':
             q = Items.objects.filter(Item_title__contains=val)
             if not q:
@@ -16,10 +19,10 @@ def check_stock(request):
             if not q:
                 return render(request, 'Check_stock/check_html.html', {'message': 'The item does not exist!'})
 
-        return render(request,'Check_stock/disp_stock.html', {'items': q})
+        return render(request, 'Check_stock/disp_stock.html', {'items': q})
 
     else:
-        return render(request,'Check_stock/check_html.html')
+        return render(request, 'Check_stock/check_html.html')
 
 
 def view_all_items(request):
