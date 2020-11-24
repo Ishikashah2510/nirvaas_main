@@ -4,7 +4,7 @@ from buy_student.models import Cart, Order
 import random
 from datetime import date
 # Create your views here.
-
+from datetime import datetime
 
 def display_details(request):
     item_id = request.GET.get('item_id')
@@ -96,7 +96,8 @@ def generate_invoice(request):
     for item in c:
         o = Order(Item_id=item.Item_id, Item_title=item.Item_title,
                   Item_price=item.Item_price, Item_quantity=item.Item_quantity,
-                  email_id=email, Order_id=oid, Order_date=date.today().strftime("%Y-%m-%d"))
+                  email_id=email, Order_id=oid, Order_date=date.today().strftime("%Y-%m-%d"),
+                  Order_time= datetime.now().strftime('%H:%M'))
         o.save()
     c.delete()
     c = Order.objects.filter(email_id=email)

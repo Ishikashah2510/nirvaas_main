@@ -40,17 +40,13 @@
     <tr>
     <td>Order ID</td><td>Item ID</td><td>Item name</td><td>Price</td>
     </tr>
-    {% if items|length > 1 %}
+
     {% for item in items %}
         <tr>
         <td>{{ item.Order_id }}</td><td>{{ item.Item_id }}</td><td>{{ item.Item_title }}</td><td>{{ item.Item_price }}</td>
         </tr>
     {% endfor %}
-    {% else %}
-        <tr>
-        <td><td>{{ items.Item_id }}</td><td>{{ items.Item_title }}</td><td>{{ items.Item_price }}</td>
-        </tr>
-    {% endif %}
+
 </table>
 
 </center>

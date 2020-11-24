@@ -20,3 +20,4 @@ class Order(models.Model):
     email_id = models.EmailField(default="")
     Order_id = models.IntegerField(default=111)
     Order_date = models.DateField(default='2000-10-05')
+    Order_time = models.TimeField(default='06:04')
