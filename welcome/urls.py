@@ -36,4 +36,7 @@ urlpatterns = [
     url(r'^place_an_item_on_bid/$', bvws.place_item_on_bid, name='place_an_item_on_bid'),
     url(r'^view_items_on_bid/$', bvws.view_items_placed_on_bid, name='view_items_on_bid'),
     url(r'^remove_item_from_bid/$', bvws.remove_item_from_bid, name='remove_item_from_bid'),
+    url(r'^old_bids/$', bvws.old_bids, name='old_bids'),
+    url(r'^make_a_bid/$', bvws.make_a_bid, name='make_a_bid'),
+    url(r'^view_items_bid_on/$', bvws.view_items_bid_on, name='view_items_bid_on'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
