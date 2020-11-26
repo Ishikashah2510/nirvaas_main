@@ -117,7 +117,7 @@ def make_a_bid(request):
             b = Bidding(item_id=item_id, seller_email=i.seller_email,
                         buyer_email=email, curr_bid_value=bid_val,
                         prev_bid_value=i.threshold_value, threshold_value=i.threshold_value,
-                        prev_buyer_email=email, item_name=i.item_name)
+                        prev_buyer_email=email, item_name=i.item_name, item_place_date=bid.item_place_date)
             b.save()
             return render(request, 'Bidding/bid_options.html', {'message': 'Your bid has been placed!'})
     else:

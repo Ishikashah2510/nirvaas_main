@@ -22,6 +22,7 @@ class Bidding(models.Model):
     threshold_value = models.FloatField(default=0)
     old_bid_date = models.DateField(default='2000-10-05')
     new_bid_date = models.DateField(default='2000-10-05')
+    item_place_date = models.DateField(default='2000-10-05')
 
 
 class old_items_on_bid(models.Model):
