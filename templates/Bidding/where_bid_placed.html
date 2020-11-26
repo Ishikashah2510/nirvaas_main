@@ -30,23 +30,34 @@
   <a href="{% url 'index' %}" class="w3-bar-item w3-button w3-hover-indigo" style="width: 20%">Logout</a>
 </div>
 <center>
-    {% if message %}<p><strong>{{ message }}</strong></p>{% endif %}
-
-    {% if items|length > 1 %}
-        <table>
-    <tr>
-    <td>Item ID</td><td>Item name</td><td>Price</td><td>Date</td> <td>Time</td>
-    </tr>
+    {% if items %}
+    <table>
+        <tr>
+            <td>Item ID</td><td>Item Name</td><td>Bid placed by you</td><td>Date on which you placed the bid</td><td>Seller Email</td>
+        </tr>
     {% for item in items %}
         <tr>
-        <td>{{ item.Item_id }}</td><td>{{ item.Item_title }}</td><td>{{ item.Item_price }}</td><td>{{ item.Order_date }}</td> <td>{{ item.Order_time }}</td>
+        <td>{{ item.item_id }}</td><td>{{ item.item_name }}</td><td>{{ item.curr_bid_value }}</td><td>{{ item.new_bid_date }}</td><td>{{ item.seller_email }}</td>
         </tr>
     {% endfor %}
-    {% else %}
-        <tr>
-        <td><td>{{ items.Item_id }}</td><td>{{ items.Item_title }}</td><td>{{ items.Item_price }}</td><td>{{ item.Order_date }}</td> <td>{{ item.Order_time }}</td>
-        </tr>
+        {% else %}
+        <p><strong>No bids placed!</strong></p>
     {% endif %}
-</table>
+    </table>
+        {% if items_exceed %}
+        <p><strong>Bids you are exceeded on by one person</strong></p>
+        <table>
+        <tr>
+            <td>Item ID</td><td>Item Name</td><td>Bid placed by you</td><td>Date on which you placed the bid</td><td>Seller Email</td><td>New Bid value</td><td>New bid placed by</td><td>New bid placed on</td>
+        </tr>
+    {% for item in items_exceed %}
+        <tr>
+        <td>{{ item.item_id }}</td><td>{{ item.item_name }}</td><td>{{ item.prev_bid_value }}</td><td>{{ item.old_bid_date }}</td><td>{{ item.seller_email }}</td><td>{{ item.curr_bid_value }}</td><td>{{ item.buyer_email }}</td><td>{{ item.new_bid_date }}</td>
+        </tr>
+    {% endfor %}
+    </table>
+        {% else %}
+        <p><strong>No bids exceeded!</strong></p>
+    {% endif %}
 </center>
 </html>

@@ -11,7 +11,8 @@
  background-size: cover;
 }
 		th, td{
-			padding: 100px;
+			padding-right: 70px;
+            padding-bottom: 20px;
 			text-align: center;
 		}
 
@@ -22,29 +23,26 @@
 </head>
 <br>
 <div class="w3-bar w3-border w3-light-grey">
- <a href='{% url "welcome:display_all_item" %}' class="w3-bar-item w3-button w3-hover-pale-blue" style="width: 20%">Buy an item</a>
+  <a href='{% url "welcome:display_all_item" %}' class="w3-bar-item w3-button w3-hover-pale-blue" style="width: 20%">Buy an item</a>
   <a href="{% url "welcome:goto_bid_options" %}" class="w3-bar-item w3-button w3-hover-light-blue" style="width: 20%">Bid</a>
   <a href="{% url "welcome:view_cart" %}?which=1" class="w3-bar-item w3-button w3-hover-cyan" style="width: 20%">View cart</a>
     <a href="{% url "welcome:goto_display_order" %}" class="w3-bar-item w3-button w3-hover-cyan" style="width: 20%">View Orders</a>
   <a href="{% url 'index' %}" class="w3-bar-item w3-button w3-hover-indigo" style="width: 20%">Logout</a>
 </div>
-{% if item %}
 <center>
+{% if items %}
     <table>
-        <tr>
-            <td>
-                <img src='{{ item.Item_photo  }}'>
-            </td>
-            <td>
-                {{ item.Item_title }} <br> <br> {{ item.Item_ab }} <br> <br>{{ item.Item_description }} <br> <br> {{ item.Item_type }} <br> <br> {{ item.Item_price }}
-            </td>
-        </tr>
+    <tr>
+        <td>Item ID</td><td>The threshold value you set</td><td>The last bid value</td><td>Buyer Email</td><td>Item placed on bid on</td>
+    </tr>
+        {% for item in items %}
+            <tr>
+            <td>{{ item.item_id }}</td><td>{{ item.threshold_value }}</td><td>{{ item.last_bid_value }}</td><td>{{ item.buyer_email }}</td><td>{{ item.bid_placed_on }}</td>
+            </tr>
+    {% endfor %}
     </table>
-    <form action="{% url "welcome:add_to_cart" %}" method="post">
-        {% csrf_token %}
-        <input type="number" name="id" value="{{ item.Item_id }}" hidden>
-        <input type="submit" name="submit" value="Add to Cart">
-    </form>
-</center>
+    {% else %}
+    <p><strong>No Old Items on Bid</strong></p>
 {% endif %}
+</center>
 </html>

@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from welcome.forms import Login, Registration
+from Bidding.models import Bidding, BidItems, old_items_on_bid
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse, Http404
 from django.urls import reverse
@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 import re
 from welcome.models import Users
 from django.db.models import Q
+import datetime as dt
 
 
 def index(request):
@@ -63,7 +64,23 @@ def user_login(request):
             try:
                 check_details = Users.objects.get(email_id=str(email), password=str(password_), type_user=str(choice))
             except Users.DoesNotExist:
-                return render(request, 'welcome/login.html', {'error_message': 'Kindly check the details you entered', })
+                return render(request, 'welcome/login.html',
+                              {'error_message': 'Kindly check the details you entered', })
+            today = dt.date.today()
+            gone = today - dt.timedelta(days=7)
+            i = BidItems.objects.filter(seller_email=email)
+            for item in i:
+                if str(item.item_place_date) < (gone.strftime("%Y-%m-%d")):
+                    try:
+                        b = Bidding.objects.get(seller_email=email)
+                        r = old_items_on_bid(item_id=item.item_id, seller_email=email,
+                                             buyer_email=b.buyer_email, threshold_value=item.threshold_value,
+                                             last_bid_value=b.curr_bid_value)
+                        r.save()
+                        item.delete()
+                        b.delete()
+                    except Bidding.DoesNotExist:
+                        pass
             return render(request, 'welcome/homepage_student.html')
         elif choice == 'Stationery_staff':
             try:

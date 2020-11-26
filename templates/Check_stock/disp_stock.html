@@ -42,14 +42,11 @@
     <tr>
     <td>Photo</td><td>Item ID</td><td>Item name</td><td>Quantity</td>
     </tr>
-
     {% for item in items %}
         <tr>
         <td><img src="{{ item.Item_photo }}" alt="{{ item.Item_title }}" width="70px" height="50px"></td><td>{{ item.Item_id }}</td><td>{{ item.Item_title }}</td><td>{{ item.Item_quantity }}</td>
         </tr>
     {% endfor %}
-
-
 </table>
 </center>
 </body>
