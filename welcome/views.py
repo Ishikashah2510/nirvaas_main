@@ -5,6 +5,7 @@ from django.http import HttpResponseRedirect, HttpResponse, Http404
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 import re
+from sell_staff.models import Items
 from welcome.models import Users
 from django.db.models import Q
 import datetime as dt
@@ -60,6 +61,10 @@ def user_login(request):
         f = open('loggedin.txt', 'w')
         f.write(email)
         f.close()
+        order_check = Items.objects.all()
+        for a in order_check:
+            if a.Item_quantity <= 0:
+                a.delete()
         if choice == 'Student':
             try:
                 check_details = Users.objects.get(email_id=str(email), password=str(password_), type_user=str(choice))

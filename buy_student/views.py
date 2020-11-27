@@ -93,12 +93,23 @@ def generate_invoice(request):
     email = f.readline()
     c = Cart.objects.filter(email_id=email)
     oid = random.randint(100, 999)
+    o = []
+    f = []
     for item in c:
-        o = Order(Item_id=item.Item_id, Item_title=item.Item_title,
-                  Item_price=item.Item_price, Item_quantity=item.Item_quantity,
-                  email_id=email, Order_id=oid, Order_date=date.today().strftime("%Y-%m-%d"),
-                  Order_time= datetime.now().strftime('%H:%M'))
-        o.save()
+        o.append(Order(Item_id=item.Item_id, Item_title=item.Item_title,
+                       Item_price=item.Item_price, Item_quantity=item.Item_quantity,
+                       email_id=email, Order_id=oid, Order_date=date.today().strftime("%Y-%m-%d"),
+                       Order_time=datetime.now().strftime('%H:%M')))
+        x = Items.objects.get(Item_id=item.Item_id)
+        x.Item_quantity -= 1
+        f.append(x)
+        if x.Item_quantity <= 0:
+            msg = 'Sorry, item ' + x.Item_title + " doesn't have demanded quantity!"
+            return render(request, 'buy_student/display_orders.html', {'message': msg})
+    for item in o:
+        item.save()
+    for item in f:
+        item.save()
     c.delete()
     c = Order.objects.filter(email_id=email)
     return render(request, 'buy_student/display_orders.html', {'items': c, 'message': 'Order has been successfully placed'})

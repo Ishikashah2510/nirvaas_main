@@ -42,9 +42,8 @@ def view_items_placed_on_bid(request):
     b = BidItems.objects.filter(seller_email=email)
     bi = Bidding.objects.filter(seller_email=email)
     if len(bi) != 0:
-        return render(request, 'Bidding/view_items_on_bid.html', {'items': bi})
-    return render(request, 'Bidding/view_items_on_bid.html', {'items': b})
-
+        return render(request, 'Bidding/view_items_on_bid.html', {'items': bi, 'items1': b})
+    return render(request, 'Bidding/view_items_on_bid.html', {'items1': b})
 
 def remove_item_from_bid(request):
     if request.method == 'POST':
@@ -117,7 +116,8 @@ def make_a_bid(request):
             b = Bidding(item_id=item_id, seller_email=i.seller_email,
                         buyer_email=email, curr_bid_value=bid_val,
                         prev_bid_value=i.threshold_value, threshold_value=i.threshold_value,
-                        prev_buyer_email=email, item_name=i.item_name, item_place_date=bid.item_place_date)
+                        prev_buyer_email=email, item_name=i.item_name, item_place_date=i.item_place_date,
+                        new_bid_date=date.today().strftime('%Y-%m-%d'))
             b.save()
             return render(request, 'Bidding/bid_options.html', {'message': 'Your bid has been placed!'})
     else:
@@ -126,7 +126,7 @@ def make_a_bid(request):
         i = BidItems.objects.exclude(seller_email=email)
         bi = Bidding.objects.exclude(seller_email=email)
         if len(bi) != 0:
-            return render(request, 'Bidding/make_a_bid.html', {'items': bi})
+            return render(request, 'Bidding/make_a_bid.html', {'items': bi, 'items1': i})
         return render(request, 'Bidding/make_a_bid.html', {'items': i})
 
 
@@ -134,5 +134,5 @@ def view_items_bid_on(request):
     f = open('loggedin.txt', 'r')
     email = f.readline()
     items = Bidding.objects.filter(buyer_email=email)
-    items_exceed = Bidding.objects.filter(prev_buyer_email=email)
+    items_exceed = Bidding.objects.filter(prev_buyer_email=email).exclude(buyer_email=email)
     return render(request, 'Bidding/where_bid_placed.html', {'items': items, 'items_exceed': items_exceed})

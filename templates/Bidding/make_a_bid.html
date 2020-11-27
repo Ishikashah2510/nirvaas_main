@@ -31,26 +31,33 @@
 </div>
 <center>
 {% if message %}<p><strong>{{ message }}</strong></p>{% endif %}
-{% if items %}
+{% if items1 %}
     <form action="{% url 'welcome:make_a_bid' %}" method="post">
     {% csrf_token %}
     <br><br>
     <label>Enter item ID on which you wish to place a bid</label>
     <input type="number" name="item_id" value="item_id" required><br><br>
     <label>Enter your bid</label>
-    <input type="number" name="bid_val" value="bid_val"><br><br>
+    <input type="number" name="bid_val" value="bid_val" required><br><br>
     <label>The bid value must be strictly greater than the last bid value</label><br><br>
     <input type="submit" value="Place Bid">
     </form>
     <table>
     <tr>
-        <td>Item ID</td><td>Threshold value set</td><td>The last bid value</td><td>Seller Email</td>
+        <td>Item ID</td><td>Item name</td><td>Threshold value set</td><td>The last bid value</td><td>Seller Email</td>
     </tr>
-        {% for item in items %}
+        {% for item in items1 %}
             <tr>
-            <td>{{ item.item_id }}</td><td>{{ item.threshold_value }}</td><td>{{ item.curr_bid_value }}</td><td>{{ item.seller_email }}</td>
+            <td>{{ item.item_id }}</td><td>{{ item.item_name }}</td><td>{{ item.threshold_value }}</td><td>{{ item.curr_bid_value }}</td><td>{{ item.seller_email }}</td>
             </tr>
     {% endfor %}
+    {% if items %}
+        {% for item in items %}
+            <tr>
+            <td>{{ item.item_id }}</td><td>{{ item.item_name }}</td><td>{{ item.threshold_value }}</td><td>{{ item.curr_bid_value }}</td><td>{{ item.seller_email }}</td>
+            </tr>
+    {% endfor %}
+        {% endif %}
     </table>
     {% else %}
     <p><strong>No Items on Bid</strong></p>

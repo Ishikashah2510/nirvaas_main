@@ -38,7 +38,21 @@
         </tr>
     {% for item in items %}
         <tr>
-        <td>{{ item.item_name }}</td><td>{{ item.threshold_value }}</td><td>{{ item.item_place_date }}</td><td>{{ item.curr_bid_value }}</td><td>{{ item.prev_bid_value }}</td>
+        <td>{{ item.item_name }}</td><td>{{ item.threshold_value }}</td><td>{{ item.item_place_date }}</td><td>{{ item.curr_bid_value }}</td><td>{{ item.buyer_email }}</td>
+        </tr>
+    {% endfor %}
+    </table>
+    {% endif %}
+<br><br>
+    {% if items1 %}
+        Items Placed on Bid without ongoing bids
+    <table>
+        <tr>
+            <td>Item Name</td><td>Threshold value</td><td>Date of placing item</td>
+        </tr>
+    {% for item in items1 %}
+        <tr>
+        <td>{{ item.item_name }}</td><td>{{ item.threshold_value }}</td><td>{{ item.item_place_date }}</td>
         </tr>
     {% endfor %}
     </table>
