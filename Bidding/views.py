@@ -112,7 +112,7 @@ def make_a_bid(request):
             if float(bid_val) <= i.threshold_value:
                 bi = BidItems.objects.exclude(seller_email=email)
                 return render(request, 'Bidding/make_a_bid.html',
-                              {'message': 'Kindly enter a bid value greater than ' + str(i.threshold_value), 'items': bi})
+                              {'message': 'Kindly enter a bid value greater than ' + str(i.threshold_value), 'items1': bi})
             b = Bidding(item_id=item_id, seller_email=i.seller_email,
                         buyer_email=email, curr_bid_value=bid_val,
                         prev_bid_value=i.threshold_value, threshold_value=i.threshold_value,
