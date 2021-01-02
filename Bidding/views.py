@@ -2,7 +2,7 @@ from django.shortcuts import render
 import random
 from Bidding.models import Bidding, BidItems, old_items_on_bid
 from datetime import date
-from datetime import datetime
+from welcome import notification_sender as ns
 # Create your views here.
 
 
@@ -31,6 +31,9 @@ def place_item_on_bid(request):
                      seller_email=email, item_name=item_name,
                      item_place_date=date.today().strftime("%Y-%m-%d"))
         i.save()
+        notification = "You placed item " + str(item_name) + " on bid"
+        to = email
+        ns.send_notification(notification, to)
         return render(request, 'Bidding/bid_options.html', {'message': 'The item has been successfully uploaded!'})
     else:
         return render(request, 'Bidding/place_on_bid.html')
@@ -44,6 +47,7 @@ def view_items_placed_on_bid(request):
     if len(bi) != 0:
         return render(request, 'Bidding/view_items_on_bid.html', {'items': bi, 'items1': b})
     return render(request, 'Bidding/view_items_on_bid.html', {'items1': b})
+
 
 def remove_item_from_bid(request):
     if request.method == 'POST':
@@ -60,6 +64,9 @@ def remove_item_from_bid(request):
             except Bidding.DoesNotExist:
                 pass
             i = BidItems.objects.filter(seller_email=email)
+            notification = "You removed item " + str(item_id) + " from bid"
+            to = email
+            ns.send_notification(notification, to)
             return render(request, 'Bidding/remove_item_from_bid.html', {'message': 'Item removed', 'items': i})
         except BidItems.DoesNotExist:
             return render(request, 'Bidding/remove_item_from_bid.html',
@@ -106,6 +113,15 @@ def make_a_bid(request):
                         item_name=bid.item_name, prev_buyer_email=i.buyer_email,
                         old_bid_date=i.new_bid_date, new_bid_date=date.today().strftime("%Y-%m-%d"))
             b.save()
+            notification = "You placed bid on " + str(bid.item_name) + " of Rs. " + str(bid_val)
+            to = email
+            ns.send_notification(notification, to)
+            notification = "Bid was placed on " + str(i.item_name) + " of Rs. " + str(bid_val) + "by " + str(email)
+            to = i.seller_email
+            ns.send_notification(notification, to)
+            notification = "Your bid on " + str(i.item_name) + " was exceeded by " + str(email)
+            to = i.buyer_email
+            ns.send_notification(notification, to)
             return render(request, 'Bidding/bid_options.html', {'message': 'Your bid has been placed!'})
         except Bidding.DoesNotExist:
             i = BidItems.objects.get(item_id=item_id)
@@ -119,6 +135,12 @@ def make_a_bid(request):
                         prev_buyer_email=email, item_name=i.item_name, item_place_date=i.item_place_date,
                         new_bid_date=date.today().strftime('%Y-%m-%d'))
             b.save()
+            notification = "You placed bid on " + str(i.item_name) + " of Rs. " + str(bid_val)
+            to = email
+            ns.send_notification(notification, to)
+            notification = "Bid was placed on " + str(i.item_name) + " of Rs. " + str(bid_val) + " by " + str(email)
+            to = i.seller_email
+            ns.send_notification(notification, to)
             return render(request, 'Bidding/bid_options.html', {'message': 'Your bid has been placed!'})
     else:
         f = open('loggedin.txt', 'r')
@@ -127,7 +149,7 @@ def make_a_bid(request):
         bi = Bidding.objects.exclude(seller_email=email)
         if len(bi) != 0:
             return render(request, 'Bidding/make_a_bid.html', {'items': bi, 'items1': i})
-        return render(request, 'Bidding/make_a_bid.html', {'items': i})
+        return render(request, 'Bidding/make_a_bid.html', {'items1': i})
 
 
 def view_items_bid_on(request):

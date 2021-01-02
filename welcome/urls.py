@@ -39,4 +39,6 @@ urlpatterns = [
     url(r'^old_bids/$', bvws.old_bids, name='old_bids'),
     url(r'^make_a_bid/$', bvws.make_a_bid, name='make_a_bid'),
     url(r'^view_items_bid_on/$', bvws.view_items_bid_on, name='view_items_bid_on'),
+    url(r'^searchresults/$', views.search_item, name='searchresults'),
+    url(r'^notifications/$', views.view_notification, name='notifications'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

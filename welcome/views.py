@@ -6,7 +6,7 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 import re
 from sell_staff.models import Items
-from welcome.models import Users
+from welcome.models import Users, Notification
 from django.db.models import Q
 import datetime as dt
 
@@ -77,7 +77,7 @@ def user_login(request):
             for item in i:
                 if str(item.item_place_date) < (gone.strftime("%Y-%m-%d")):
                     try:
-                        b = Bidding.objects.get(seller_email=email)
+                        b = Bidding.objects.get(seller_email=email, item_id=item.item_id)
                         r = old_items_on_bid(item_id=item.item_id, seller_email=email,
                                              buyer_email=b.buyer_email, threshold_value=item.threshold_value,
                                              last_bid_value=b.curr_bid_value)
@@ -101,3 +101,18 @@ def user_login(request):
             return render(request, 'welcome/homepage_admin.html')
     else:
         return render(request, 'welcome/login.html', {})
+
+
+def search_item(request):
+    if request.method == 'POST':
+        search = request.POST.get('searchinp')
+        q = Items.objects.filter(Item_title__contains=search)
+        a = Items.objects.filter(Item_description__contains=search)
+        return render(request, 'welcome/searchresultdisplay.html', {'items': q, 'items1': a})
+
+
+def view_notification(request):
+    f = open('loggedin.txt', 'r')
+    email = f.readline()
+    c = Notification.objects.filter(email_id=email).order_by('date')[::-1]
+    return render(request, 'welcome/notification_viewer.html', {'items': c})

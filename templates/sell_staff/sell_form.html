@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,10 +24,35 @@ text-align: center;
 padding-right: 100px;
 }
 
+        .notification {
+  background-color: #555;
+  color: white;
+  text-decoration: none;
+  padding: 15px 20px;
+  position: relative;
+  display: inline-block;
+  border-radius: 2px;
+}
+
+.notification:hover {
+  background: red;
+}
+
+.notification .badge {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  padding: 5px 10px;
+  border-radius: 50%;
+  background: red;
+  color: white;
+}
+
 </style>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <br>
 <div class="w3-bar w3-border w3-light-grey">
@@ -35,9 +61,12 @@ padding-right: 100px;
   <a href='{% url "welcome:check_stock" %}' class="w3-bar-item w3-button w3-hover-light-blue" style="width: 25%">Check Stock</a>
   <a href='{% url "index" %}' class="w3-bar-item w3-button w3-hover-indigo" style="width: 25%">Logout</a>
 </div>
+<a href="{% url 'welcome:notifications' %}" class="notification">
+  <span><i class="material-icons">notifications</i></span>
+</a>
 <h1 style="color: #FB7A53; text-align: center;">Sell an Item</h1>
 <br>
-<form action="{% url 'welcome:sell' %}" method="post">
+<form action="{% url 'welcome:sell' %}" method="post" enctype="multipart/form-data">
     {% csrf_token %}
 <label>
 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspItem Name : <input type="text" name="item_name" id="item_name" required>
@@ -61,7 +90,7 @@ Item Description : <input type="text" name="item_desc" id="item_desc" size="20" 
 <br><br>
 <label>
 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-Item Photo : <input type="file" name="item_pic" id="item_pic" accept="image/*" required>
+Item Photo : <input type="file" name="Item_photo" id="Item_photo" required>
 </label>
 <br><br>
 <label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp

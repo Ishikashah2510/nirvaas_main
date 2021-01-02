@@ -23,10 +23,35 @@
 			padding-right: 100px;
 		}
 
+        .notification {
+  background-color: #555;
+  color: white;
+  text-decoration: none;
+  padding: 15px 20px;
+  position: relative;
+  display: inline-block;
+  border-radius: 2px;
+}
+
+.notification:hover {
+  background: red;
+}
+
+.notification .badge {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  padding: 5px 10px;
+  border-radius: 50%;
+  background: red;
+  color: white;
+}
+
 	</style>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <br>
 <div class="w3-bar w3-border w3-light-grey">
@@ -35,6 +60,10 @@
   <a href='{% url "welcome:check_stock" %}' class="w3-bar-item w3-button w3-hover-light-blue" style="width: 25%">Check Stock</a>
   <a href='{% url "index" %}' class="w3-bar-item w3-button w3-hover-indigo" style="width: 25%">Logout</a>
 </div>
+<br><br>
+<a href="{% url 'welcome:notifications' %}" class="notification">
+  <span><i class="material-icons">notifications</i></span>
+</a>
 <br><br>
 <center>
 {% if message %} <p> <strong> {{ message }}</strong></p> {% endif %}

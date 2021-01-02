@@ -11,5 +11,5 @@ class Items(models.Model):
     Item_price = models.FloatField()
     Item_quantity = models.IntegerField(max_length=2)
     Item_description = models.CharField(max_length=1000, default="")
-    Item_photo = models.ImageField(upload_to='media')
+    Item_photo = models.ImageField(upload_to='')
     Item_type = models.CharField(max_length=20)
