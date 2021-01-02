@@ -1,6 +1,6 @@
 <html>
 <head>
-	<title>Bidding</title>
+	<title>Rent an Item</title>
 	<style type="text/css">
 		a{
 			font-size: 20px;
@@ -11,7 +11,7 @@
  background-size: cover;
 }
 		th, td{
-			padding-right: 70px;
+			padding-left: 70px;
             padding-bottom: 20px;
 			text-align: center;
 		}
@@ -140,7 +140,7 @@
 }
 }
 
-        .notification {
+            .notification {
   background-color: #555;
   color: white;
   text-decoration: none;
@@ -163,6 +163,7 @@
   background: red;
   color: white;
 }
+
 
     </style>
 
@@ -195,41 +196,21 @@
 <a href="{% url 'welcome:notifications' %}" class="notification">
   <span><i class="material-icons">notifications</i></span>
 </a>
-
 <center>
-{% if message %}<p><strong>{{ message }}</strong></p>{% endif %}
+{% if message %}<p><strong>message</strong></p>{% endif %}
 {% if items %}
 <table>
     <tr>
-    <td>Item ID</td><td>Item name</td><td>Price</td>
+    <td>Photo</td><td>Item ID</td><td>Item name</td><td>Rented on</td><td>Rented until</td>
     </tr>
-
-    {% for item in items %}
         <tr>
-        <td>{{ item.Item_id }}</td><td>{{ item.Item_title }}</td><td>{{ item.Item_price }}</td>
+        <td><img src="{{ items.item_photo.url }}" alt="{{ items.item_name }}" width="150px" height="150px"></td>
+            <td>{{ items.rent_id }}</td><td>{{ items.item_name }}</td><td>{{ items.rent_date }}</td>
+            <td>{{ items.rented_until }}</td>
         </tr>
-    {% endfor %}
-
 </table>
-    {% if total %}
-        <p><strong>Total :  {{ total }}</strong></p>
-    {% endif %}
-<form action="{% url 'welcome:view_cart' %}?which=2" method="post">
-    {% csrf_token %}
-    <input type="submit" value="Remove an Item from the cart">
-</form>
-<form action="{% url 'welcome:goto_empty_confirm' %}" method="post">
-    {% csrf_token %}
-    <input type="submit" value="Empty Cart">
-</form>
-<form action="{% url 'welcome:goto_checkout' %}" method="post">
-    {% csrf_token %}
-    <input type="submit" value="Checkout">
-</form>
-    {% else %}
-    <br>
-    No items in the cart!
 {% endif %}
 </center>
+</body>
 
 </html>

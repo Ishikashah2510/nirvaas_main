@@ -1,6 +1,6 @@
 <html>
 <head>
-	<title>Bidding</title>
+	<title>Renting</title>
 	<style type="text/css">
 		a{
 			font-size: 20px;
@@ -11,8 +11,7 @@
  background-size: cover;
 }
 		th, td{
-			padding-right: 70px;
-            padding-bottom: 20px;
+			padding: 100px;
 			text-align: center;
 		}
             body {
@@ -140,7 +139,7 @@
 }
 }
 
-        .notification {
+            .notification {
   background-color: #555;
   color: white;
   text-decoration: none;
@@ -164,6 +163,7 @@
   color: white;
 }
 
+
     </style>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -172,7 +172,7 @@
 </head>
 <br>
 <div class="w3-bar w3-border w3-light-grey">
-  <a href='{% url "welcome:display_all_item" %}' class="w3-bar-item w3-button w3-hover-pale-blue" style="width: 18%">Buy an item</a>
+ <a href='{% url "welcome:display_all_item" %}' class="w3-bar-item w3-button w3-hover-pale-blue" style="width: 18%">Buy an item</a>
     <a href='{% url "welcome:rent_options" %}' class="w3-bar-item w3-button w3-hover-pale-blue" style="width: 18%">Renting</a>
   <a href="{% url "welcome:goto_bid_options" %}" class="w3-bar-item w3-button w3-hover-light-blue" style="width: 16%">Bid</a>
   <a href="{% url "welcome:view_cart" %}?which=1" class="w3-bar-item w3-button w3-hover-cyan" style="width: 16%">View cart</a>
@@ -196,40 +196,15 @@
   <span><i class="material-icons">notifications</i></span>
 </a>
 
+<h1 style="color: #FB7A53; text-align: center;">Kindly select an option from below</h1>
 <center>
-{% if message %}<p><strong>{{ message }}</strong></p>{% endif %}
-{% if items %}
-<table>
-    <tr>
-    <td>Item ID</td><td>Item name</td><td>Price</td>
-    </tr>
-
-    {% for item in items %}
-        <tr>
-        <td>{{ item.Item_id }}</td><td>{{ item.Item_title }}</td><td>{{ item.Item_price }}</td>
-        </tr>
-    {% endfor %}
-
-</table>
-    {% if total %}
-        <p><strong>Total :  {{ total }}</strong></p>
-    {% endif %}
-<form action="{% url 'welcome:view_cart' %}?which=2" method="post">
-    {% csrf_token %}
-    <input type="submit" value="Remove an Item from the cart">
-</form>
-<form action="{% url 'welcome:goto_empty_confirm' %}" method="post">
-    {% csrf_token %}
-    <input type="submit" value="Empty Cart">
-</form>
-<form action="{% url 'welcome:goto_checkout' %}" method="post">
-    {% csrf_token %}
-    <input type="submit" value="Checkout">
-</form>
-    {% else %}
-    <br>
-    No items in the cart!
-{% endif %}
-</center>
-
+    {% if message %}<p><strong>{{ message }}</strong></p>{% endif %}
+<br><br>
+<ul>
+  <li><a class="navbar-link" href="{% url 'welcome:view_on_rent_student' %}" style="text-decoration: none; color: #F05371">View Items available on rent</a></li>
+  <li><a class="navbar-link" href="{% url 'welcome:current_rented_items_student' %}" style="text-decoration: none; color: #f05371">View the items you have rented</a></li>
+    <li><a class="navbar-link" href="{% url 'welcome:rent_item' %}" style="text-decoration: none; color: #F05371">Rent an item</a></li>
+    <li><a class="navbar-link" href="{% url 'welcome:make_a_bid' %}" style="text-decoration: none; color: #F05371">View previous items you rented</a></li>
+</ul>
+    </center>
 </html>

@@ -23,6 +23,73 @@ label{
 text-align: center;
 padding-right: 100px;
 }
+            body {
+        margin: 0;
+        height: 100vh;
+
+        align-items: center;
+        justify-content: center;
+        background-color: #E1C7AA;
+    }
+
+    ul {
+        padding: 0;
+        list-style-type: none;
+    }
+
+    li {
+        font-size: 25px;
+        width: 16em;
+        height: 2em;
+        text-align: center;
+        line-height: 2em;
+        font-family: sans-serif;
+        text-transform: capitalize;
+        position: relative;
+        transition: 0.5s;
+        margin: 0.8em;
+        color: #e1c7aa;
+    }
+
+    li::before,
+    li::after {
+        content: '';
+        position: absolute;
+        width: 0.6em;
+        height: 0.6em;
+        background-color: gainsboro;
+        border-radius: 50%;
+        transition: 0.5s cubic-bezier(0.5, -0.5, 0.25, 1.5);
+        top: calc(50% - 0.6em / 2);
+    }
+
+    li::before {left: 0; z-index: -1;}
+    li::after {right: 0; z-index: -2;}
+
+    li:hover {
+        color: white;
+    }
+
+    li:hover::before,
+    li:hover::after {
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+        background-color: #FBEBA3;
+    }
+
+    li:hover::before {
+        top: 0;
+    }
+
+    li:hover::after {
+        right: -0.4em;
+        filter: brightness(0.8);
+    }
+        body{
+            background-color: #cccccc;
+            background-size: cover;
+        }
 
         .notification {
   background-color: #555;
@@ -65,9 +132,14 @@ padding-right: 100px;
 <a href="{% url 'welcome:notifications' %}" class="notification">
   <span><i class="material-icons">notifications</i></span>
 </a>
-<h1 style="color: #FB7A53; text-align: center;">Sell an Item</h1>
+
+<center>
+    {% if message %}<p><strong>{{ message }}</strong></p>{% endif %}
+<br><br>
+
+<h1 style="color: #FB7A53; text-align: center;">Put an item on Rent</h1>
 <br>
-<form action="{% url 'welcome:sell' %}" method="post" enctype="multipart/form-data">
+<form action="{% url 'welcome:put_on_rent_staff' %}" method="post" enctype="multipart/form-data">
     {% csrf_token %}
 <label>
 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspItem Name : <input type="text" name="item_name" id="item_name" required>
@@ -75,14 +147,6 @@ padding-right: 100px;
 <br><br>
 <label>
 &nbsp&nbsp&nbspAuthor/ Brand : <input type="text" name="item_ab" id="item_ab" required>
-</label>
-<br><br>
-<label>
-&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspItem Price : <input type="number" name="item_price" id="item_price" required>
-</label>
-<br><br>
-<label>
-&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspQuantity : <input type="number" name="qty" id="qty" minimum=1 required>
 </label>
 <br><br>
 <label>
@@ -104,4 +168,5 @@ Type of Item</label><br>
 </form>
 
 </body>
+
 </html>

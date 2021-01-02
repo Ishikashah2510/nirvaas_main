@@ -7,6 +7,7 @@ import Check_Stock.views as cvws
 import admin_complete.views as avs
 import buy_student.views as bsv
 import Bidding.views as bvws
+import renting.views as rvs
 # SET THE NAMESPACE!
 app_name = 'welcome'
 # Be careful setting the name to just /login use userlogin instead!
@@ -41,4 +42,13 @@ urlpatterns = [
     url(r'^view_items_bid_on/$', bvws.view_items_bid_on, name='view_items_bid_on'),
     url(r'^searchresults/$', views.search_item, name='searchresults'),
     url(r'^notifications/$', views.view_notification, name='notifications'),
+    url(r'^rent_options/$', rvs.view_options, name='rent_options'),
+    url(r'^rent_options_staff/$', rvs.view_options_staff, name='rent_options_staff'),
+    url(r'^put_on_rent_staff/$', rvs.put_on_rent_staff, name='put_on_rent_staff'),
+    url(r'^view_on_rent_staff/$', rvs.view_items_staff, name='view_on_rent_staff'),
+    url(r'^view_on_rent_student/$', rvs.view_items_student, name='view_on_rent_student'),
+    url(r'^rent_item/$', rvs.rent_form, name='rent_item'),
+    url(r'^take_return/$', rvs.take_return, name='take_return'),
+    url(r'^current_rented_items/$', rvs.item_current_rented_staff, name='current_rented_items'),
+    url(r'^current_rented_items_student/$', rvs.item_current_rented_student, name='current_rented_items_student'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

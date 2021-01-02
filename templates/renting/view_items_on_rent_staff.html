@@ -1,0 +1,154 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+<title>Sell item</title>
+<style type="text/css">
+a{
+font-size: 20px;
+background-color: lemonchiffon;
+}
+body {
+ background-color: #cccccc;
+ background-size: cover;
+}
+th, td{
+padding-left: 70px;
+    padding-bottom:20px;
+text-align: center;
+}
+form{
+text-align: center;
+}
+label{
+text-align: center;
+padding-right: 100px;
+}
+            body {
+        margin: 0;
+        height: 100vh;
+
+        align-items: center;
+        justify-content: center;
+        background-color: #E1C7AA;
+    }
+
+    ul {
+        padding: 0;
+        list-style-type: none;
+    }
+
+    li {
+        font-size: 25px;
+        width: 16em;
+        height: 2em;
+        text-align: center;
+        line-height: 2em;
+        font-family: sans-serif;
+        text-transform: capitalize;
+        position: relative;
+        transition: 0.5s;
+        margin: 0.8em;
+        color: #e1c7aa;
+    }
+
+    li::before,
+    li::after {
+        content: '';
+        position: absolute;
+        width: 0.6em;
+        height: 0.6em;
+        background-color: gainsboro;
+        border-radius: 50%;
+        transition: 0.5s cubic-bezier(0.5, -0.5, 0.25, 1.5);
+        top: calc(50% - 0.6em / 2);
+    }
+
+    li::before {left: 0; z-index: -1;}
+    li::after {right: 0; z-index: -2;}
+
+    li:hover {
+        color: white;
+    }
+
+    li:hover::before,
+    li:hover::after {
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+        background-color: #FBEBA3;
+    }
+
+    li:hover::before {
+        top: 0;
+    }
+
+    li:hover::after {
+        right: -0.4em;
+        filter: brightness(0.8);
+    }
+        body{
+            background-color: #cccccc;
+            background-size: cover;
+        }
+
+        .notification {
+  background-color: #555;
+  color: white;
+  text-decoration: none;
+  padding: 15px 20px;
+  position: relative;
+  display: inline-block;
+  border-radius: 2px;
+}
+
+.notification:hover {
+  background: red;
+}
+
+.notification .badge {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  padding: 5px 10px;
+  border-radius: 50%;
+  background: red;
+  color: white;
+}
+
+</style>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<br>
+<div class="w3-bar w3-border w3-light-grey">
+  <a href='{% url "welcome:sell" %}' class="w3-bar-item w3-button w3-hover-pale-blue" style="width: 20%">Sell an item</a>
+    <a href='{% url "welcome:rent_options_staff" %}' class="w3-bar-item w3-button w3-hover-pale-blue" style="width: 20%">Renting</a>
+    <a href='{% url "welcome:delete_item" %}' class="w3-bar-item w3-button w3-hover-light-blue" style="width: 20%">Delete an item</a>
+  <a href='{% url "welcome:check_stock" %}' class="w3-bar-item w3-button w3-hover-light-blue" style="width: 20%">Check Stock</a>
+  <a href='{% url "index" %}' class="w3-bar-item w3-button w3-hover-indigo" style="width: 20%">Logout</a>
+</div>
+<a href="{% url 'welcome:notifications' %}" class="notification">
+  <span><i class="material-icons">notifications</i></span>
+</a>
+
+<center>
+{% if message %}<p><strong>message</strong></p>{% endif %}
+{% if items %}
+<table>
+    <tr>
+    <td>Photo</td><td>Item ID</td><td>Item name</td><td>Rented?</td><td>Renter email</td><td>Rented on</td><td>Rented until</td>
+    </tr>
+    {% for item in items %}
+        <tr>
+        <td><img src="{{ item.item_photo.url }}" alt="{{ item.item_name }}" width="150px" height="150px"></td><td>{{ item.rent_id }}</td><td>{{ item.item_name }}</td><td>{{ item.rent_var }}</td>
+        <td>{{ item.renter_email }}</td><td>{{ item.rent_date }}</td><td>{{ item.rented_until }}</td>
+        </tr>
+    {% endfor %}
+</table>
+{% endif %}
+</center>
+</body>
+</html>

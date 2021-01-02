@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'buy_student',
     'Check_Stock',
     'sell_staff',
+    'renting',
 ]
 
 MIDDLEWARE = [
