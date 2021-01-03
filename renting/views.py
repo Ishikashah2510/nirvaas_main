@@ -2,7 +2,7 @@ from django.shortcuts import render
 from renting.models import *
 import random
 from django.core.files.storage import FileSystemStorage
-from datetime import datetime
+from datetime import datetime, timedelta
 
 # Create your views here.
 
@@ -96,10 +96,22 @@ def take_return(request):
         rentid = request.POST.get('rent_id')
         try:
             r = RentItems.objects.get(rent_id=rentid)
+            rdate = r.rent_date
             r.rent_date = datetime.today() + timedelta(150)
+            email = r.renter_email
             r.renter_email = ""
             r.rent_var = False
             r.save()
+            rent_id = 100000
+            while True:
+                rent_id = random.randint(100000, 999999)
+                try:
+                    i = RentItems.objects.get(rent_id=rent_id)
+                except RentItems.DoesNotExist:
+                    break
+            f = OldRentedItems(rent_id=rent_id, renter_email=email, item_name=r.item_name,
+                               item_photo=r.item_photo, rent_date=rdate)
+            f.save()
             return render(request, 'renting/rent_options_staff.html', {'message': 'Item return taken successfully'})
         except RentItems.DoesNotExist:
             r = RentItems.objects.filter(rent_var=True)
@@ -128,3 +140,13 @@ def item_current_rented_student(request):
         return render(request, 'renting/items_current_rented_student.html', {'items': r})
     except RentItems.DoesNotExist:
         return render(request, 'renting/items_current_rented_student.html', {'message': "You haven't rented any item"})
+
+
+def view_old_rented_items_student(request):
+    f = open('loggedin.txt', 'r')
+    email = f.readline()
+    r = OldRentedItems.objects.filter(renter_email__exact=email)
+    if len(r):
+        return render(request, 'renting/olditemsrented_student.html', {'items': r})
+    else:
+        return render(request, 'renting/olditemsrented_student.html', {'message': "You haven't rented any item yet"})

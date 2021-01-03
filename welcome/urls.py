@@ -51,4 +51,5 @@ urlpatterns = [
     url(r'^take_return/$', rvs.take_return, name='take_return'),
     url(r'^current_rented_items/$', rvs.item_current_rented_staff, name='current_rented_items'),
     url(r'^current_rented_items_student/$', rvs.item_current_rented_student, name='current_rented_items_student'),
+    url(r'^old_rented_items_student/$', rvs.view_old_rented_items_student, name='old_rented_items_student'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
