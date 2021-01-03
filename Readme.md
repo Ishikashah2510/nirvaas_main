@@ -60,6 +60,7 @@ To run this project:
 5. After the old/new user homepage is displayed, you can either select new user to sign up or click on old user
 
 	5.1 The added users are : 
+	
 			Email: 18bce081@nirmauni.ac.in 
 			Password: Password123#
 			User Type: Student
