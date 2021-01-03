@@ -94,6 +94,7 @@ To run this project:
 
 *The payment and chat box modules have not been integrated.
 
+To view demo video : https://drive.google.com/file/d/1patuGFjG_6X63utbBwRoBIg1bVtcnMig/view?usp=sharing
 
 For any problems or any other queries, feel free to email on 18bce081@nirmauni.ac.in.
 
