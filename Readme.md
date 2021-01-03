@@ -97,7 +97,12 @@ To run this project:
 
 For any problems or any other queries, feel free to email on 18bce081@nirmauni.ac.in.
 
-Collaborators : Greeva Khant
-				Parth Jasani
-				Ayush Jain
-				Ishika Shah
+Collaborators : 
+		
+		Greeva Khant
+
+		Parth Jasani
+		
+		Ayush Jain
+		
+		Ishika Shah
