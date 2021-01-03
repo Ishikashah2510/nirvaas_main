@@ -78,10 +78,15 @@ To run this project:
 			User Type: System Admin
 	
 	5.2 For registration, a valid email ID is required for all users, with a 10 Digit phone number.
+	
 		For registration as a student, the email must be in the following format only. 
+		
 			{1-9}{0-9}{a-zA-Z}{a-zA-Z}{a-zA-Z}{0-9}{0-9}{0-9}@nirmauni.ac.in
+			
 			Ex: 18bce081@nirmauni.ac.in
+			
 		This was done specifically to show registration for our University's students.
+		
 		To change it for your university or for any other pattern, go to welcome->views.py->register(request)->line 39 and change the regex pattern.
 
 6. The web framework can now be used without any issues.
