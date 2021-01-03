@@ -51,8 +51,14 @@ def delete_info(request):
 
 
 def delete_confirm(request):
+    global q
     if request.method == 'POST':
+        a = q.email_id
         q.delete()
+        f = open('loggedin.txt', 'r')
+        email1 = f.readline()
+        if a == email1:
+            return render(request, 'welcome/index.html', {'message': 'Your account has been deleted'})
         return render(request, 'admin_complete/admin_delete.html', {'message': 'Account deletion successful'})
     else:
         return render(request, 'admin_complete/admin_delete.html')

@@ -2,6 +2,7 @@ from django.shortcuts import render
 import random
 from sell_staff.models import Items
 from django.core.files.storage import FileSystemStorage
+from welcome import notification_sender as ns
 # Create your views here.
 
 
@@ -26,6 +27,11 @@ def sell(request):
         i = Items(Item_id=item_id, Item_title=item_name, Item_ab=item_ab, Item_price=item_price, Item_quantity=quantity,
                   Item_description=item_desc, Item_photo=Item_photo, Item_type=item_type)
         i.save()
+        f = open('loggedin.txt', 'r')
+        email1 = f.readline()
+        notification = "You put item " + item_name + " on sale"
+        to = email1
+        ns.send_notification(notification, to)
         return render(request, 'welcome/homepage_staff.html', {'message': 'The item has been successfully uploaded!'})
     else:
         return render(request, 'sell_staff/sell_form.html')

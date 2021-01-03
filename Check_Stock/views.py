@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from sell_staff.models import Items
+from welcome import notification_sender as ns
 
 
 q = Items.objects.none()
@@ -65,8 +66,15 @@ def delete_item(request):
 
 
 def delete_confirm(request):
+    global q
     if request.method == 'POST':
+        a = q.Item_title
         q.delete()
+        f = open('loggedin.txt', 'r')
+        email1 = f.readline()
+        notification = "You deleted item " + a
+        to = email1
+        ns.send_notification(notification, to)
         return render(request, 'Check_stock/item_delete.html', {'message': 'Item deletion successful'})
     else:
         return render(request, 'Check_stock/item_delete.html')

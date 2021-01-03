@@ -3,6 +3,7 @@ from renting.models import *
 import random
 from django.core.files.storage import FileSystemStorage
 from datetime import datetime, timedelta
+from welcome import notification_sender as ns
 
 # Create your views here.
 
@@ -34,6 +35,11 @@ def put_on_rent_staff(request):
         i = RentItems(rent_id=rent_id, item_name=item_name, item_type=item_type,
                       item_description=item_desc, item_photo=item_photo, item_ab=item_ab)
         i.save()
+        f = open('loggedin.txt', 'r')
+        email = f.readline()
+        notification = "You put item" + item_name + " on rent"
+        to = email
+        ns.send_notification(notification, to)
         return render(request, 'renting/rent_options_staff.html', {'message': 'The item has been successfully uploaded!'})
     else:
         return render(request, 'renting/put_on_rent_form.html')
@@ -112,6 +118,14 @@ def take_return(request):
             f = OldRentedItems(rent_id=rent_id, renter_email=email, item_name=r.item_name,
                                item_photo=r.item_photo, rent_date=rdate)
             f.save()
+            f = open('loggedin.txt', 'r')
+            email1 = f.readline()
+            notification = "Return taken from " + email + "of item " + r.item_name
+            to = email1
+            ns.send_notification(notification, to)
+            notification = "You returned item " + r.item_name + " to " + email1
+            to = email
+            ns.send_notification(notification, to)
             return render(request, 'renting/rent_options_staff.html', {'message': 'Item return taken successfully'})
         except RentItems.DoesNotExist:
             r = RentItems.objects.filter(rent_var=True)
