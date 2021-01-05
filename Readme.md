@@ -45,9 +45,9 @@ To run this project:
 
 3. over there, you will have two options repository url, github	
 
-	3.1 if you choose repository url, paste this url in the url box -> https://github.com/Ishikashah2510/Fashion-Bazar.git
+	3.1 if you choose repository url, paste this url in the url box -> https://github.com/Ishikashah2510/nirvaas_main.git
 	
-	3.2 if you use github, login with github account, select fahsion bazar project and click on clone
+	3.2 if you use github, login with github account, select nirvaas_main project and click on clone
 
 4. Now, in the terminal, run the following commands
 
