@@ -39,6 +39,8 @@ Other features are as specifies in the SRS doc.
 
 To run this project:
 
+(In case you do not know how to run a Django project, read steps 1 through 4, else, skip to step 5)
+
 1. download pycharm professional version(with default settings). Install git from https://git-scm.com/download/win. To check installation run git --version in cmd.
 
 2. on the first screen of pycharm, you will find an option get from version control, click on it.
