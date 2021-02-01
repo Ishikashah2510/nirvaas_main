@@ -35,7 +35,7 @@ Features of this project:
 
 	=> User can view details of all accounts or a particular account and can delete an account.
 
-Other features are as specifies in the SRS doc.
+Other features are as specified in the SRS doc.
 
 To run this project:
 
